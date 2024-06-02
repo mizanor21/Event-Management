@@ -83,6 +83,10 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
+          {/* The button to open modal */}
+          <label htmlFor="my_modal_7" className="btn">
+            Sign in
+          </label>
         </div>
       </div>
     </div>
