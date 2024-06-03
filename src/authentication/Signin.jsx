@@ -43,14 +43,14 @@ const Signin = () => {
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-2 mt-5"
+            className="flex flex-col gap-3 mt-5"
           >
             <div className="input-container">
               <input
                 {...register("name")}
                 type="text"
                 placeholder=" "
-                className="input input-bordered"
+                className="input"
               />
               <label>Full Name</label>
             </div>
@@ -63,7 +63,7 @@ const Signin = () => {
                 {...register("email")}
                 type="email"
                 placeholder=" "
-                className="input input-bordered"
+                className="input"
               />
               <label>Email</label>
             </div>
@@ -71,12 +71,12 @@ const Signin = () => {
               <small className="text-red-600">{errors.email?.message}</small>
             )}
 
-            <div className="input-container">
+            <div className="input-container rounded-none">
               <input
                 {...register("password")}
                 type="password"
                 placeholder=" "
-                className="input input-bordered"
+                className="input"
               />
               <label>Password</label>
             </div>
@@ -89,7 +89,7 @@ const Signin = () => {
                 {...register("confirmPassword")}
                 type="password"
                 placeholder=" "
-                className="input input-bordered"
+                className="input"
               />
               <label>Confirm Password</label>
             </div>
@@ -102,6 +102,12 @@ const Signin = () => {
             <br />
             <input className="btn" type="submit" value="Sign up" />
           </form>
+          <div className="flex justify-center items-center text-center my-3 px-10">
+            <small className="text-xs">
+              By signing up, you agree with Event Terms of Services and Privacy
+              Policy.
+            </small>
+          </div>
         </div>
         <label className="modal-backdrop" htmlFor="my_modal_7">
           Close
