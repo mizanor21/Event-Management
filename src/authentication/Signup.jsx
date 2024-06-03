@@ -20,7 +20,7 @@ const schema = yup.object().shape({
     .required("Confirm Password is required"),
 });
 
-const Signin = () => {
+const Signup = () => {
   const {
     register,
     handleSubmit,
@@ -34,12 +34,12 @@ const Signin = () => {
 
   return (
     <div>
-      <input type="checkbox" id="signin_modal" className="modal-toggle" />
+      <input type="checkbox" id="signup_modal" className="modal-toggle" />
       <div className="modal font-serif" role="dialog">
         <div className="modal-box rounded-none max-w-[400px]">
           <div className="flex flex-col items-center">
             <img src="" alt="Event logo" />
-            <h3 className="text-xl font-serif">Sign in for Events</h3>
+            <h3 className="text-xl font-serif">Sign up for Events</h3>
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -101,6 +101,12 @@ const Signin = () => {
 
             <input className="btn" type="submit" value="Sign up" />
           </form>
+          <div className="flex justify-center items-center text-center my-3 px-10">
+            <small className="text-xs">
+              By signing up, you agree with Event Terms of Services and Privacy
+              Policy.
+            </small>
+          </div>
           <div className="divider">OR</div>
           <div className="flex justify-center items-center ">
             <button className="btn btn-ghost">Google</button>
@@ -109,13 +115,13 @@ const Signin = () => {
           <div className="text-center border-t-2 mt-2">
             <p className="my-2">
               Already a Events member?{" "}
-              <label htmlFor="signup_modal" className="link-hover font-bold">
-                Sign up
+              <label htmlFor="signin_modal" className="link-hover font-bold">
+                Sign in
               </label>
             </p>
           </div>
         </div>
-        <label className="modal-backdrop" htmlFor="signin_modal">
+        <label className="modal-backdrop" htmlFor="signup_modal">
           Close
         </label>
       </div>
@@ -123,4 +129,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default Signup;
