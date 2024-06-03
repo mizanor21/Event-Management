@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
 import auth from "../../../firebase.config";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 
 const Navbar = () => {
   // eslint-disable-next-line no-unused-vars
   const [user, loading, error] = useAuthState(auth);
+  const [signOut] = useSignOut(auth);
+
   const navItems = (
     <>
       <li>
@@ -13,7 +15,6 @@ const Navbar = () => {
       <li>
         <NavLink to={"/events"}>Events</NavLink>
       </li>
-
       <li>
         <NavLink to={"/about"}>About Us</NavLink>
       </li>
@@ -22,8 +23,9 @@ const Navbar = () => {
       </li>
     </>
   );
+
   return (
-    <div className=" sticky top-0 z-50">
+    <div className="sticky top-0 z-50">
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -56,7 +58,9 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
         <div className="navbar-end">
-          {user ? (
+          {loading ? (
+            <span className="loading loading-infinity loading-lg"></span>
+          ) : user ? (
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
@@ -98,7 +102,16 @@ const Navbar = () => {
                   <a>Settings</a>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <button
+                    onClick={async () => {
+                      const success = await signOut();
+                      if (success) {
+                        alert("You are signed out");
+                      }
+                    }}
+                  >
+                    Logout
+                  </button>
                 </li>
               </ul>
             </div>
