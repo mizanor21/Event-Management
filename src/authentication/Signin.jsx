@@ -1,18 +1,14 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import "./placeholder.css"; // Make sure to import your CSS file
 
 const schema = yup.object().shape({
-  name: yup
-    .string()
-    .min(5, "Name must be at least 5 characters")
-    .max(25, "Name must be at most 25 characters")
-    .required("Name is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
+  name: yup.string().min(5).max(25).required(),
+  email: yup.string().email().required(),
   password: yup
     .string()
-    .min(5, "Password must be at least 5 characters")
-    .max(15, "Password must be at most 15 characters")
+    .min(5)
     .matches(
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,15}$/,
       "Password must contain at least one uppercase letter, one lowercase letter, and one number"
@@ -49,48 +45,53 @@ const Signin = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-2 mt-5"
           >
-            <div className="form-control">
+            <div className="input-container">
               <input
                 {...register("name")}
                 type="text"
-                placeholder="Full Name"
+                placeholder=" "
                 className="input input-bordered"
               />
+              <label>Full Name</label>
             </div>
             {errors.name && (
               <small className="text-red-600">{errors.name?.message}</small>
             )}
-            <div className="form-control">
+
+            <div className="input-container">
               <input
                 {...register("email")}
                 type="email"
-                placeholder="Email"
+                placeholder=" "
                 className="input input-bordered"
               />
+              <label>Email</label>
             </div>
             {errors.email && (
               <small className="text-red-600">{errors.email?.message}</small>
             )}
 
-            <div className="form-control">
+            <div className="input-container">
               <input
                 {...register("password")}
                 type="password"
-                placeholder="Password"
+                placeholder=" "
                 className="input input-bordered"
               />
+              <label>Password</label>
             </div>
             {errors.password && (
               <small className="text-red-600">{errors.password?.message}</small>
             )}
 
-            <div className="form-control">
+            <div className="input-container">
               <input
                 {...register("confirmPassword")}
                 type="password"
-                placeholder="Confirm Password"
+                placeholder=" "
                 className="input input-bordered"
               />
+              <label>Confirm Password</label>
             </div>
             {errors.confirmPassword && (
               <small className="text-red-600">
