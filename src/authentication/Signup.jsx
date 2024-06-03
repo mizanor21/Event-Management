@@ -2,6 +2,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import "./placeholder.css"; // Make sure to import your CSS file
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import auth from "../../firebase.config";
+import { FaFacebook, FaGoogle } from "react-icons/fa";
 
 const schema = yup.object().shape({
   name: yup.string().min(5).max(25).required(),
@@ -21,6 +24,7 @@ const schema = yup.object().shape({
 });
 
 const Signup = () => {
+  const [signInWithGoogle] = useSignInWithGoogle(auth);
   const {
     register,
     handleSubmit,
@@ -109,8 +113,15 @@ const Signup = () => {
           </div>
           <div className="divider">OR</div>
           <div className="flex justify-center items-center ">
-            <button className="btn btn-ghost">Google</button>
-            <button className="btn btn-ghost">Facebook</button>
+            <button
+              onClick={() => signInWithGoogle()}
+              className="btn text-2xl btn-ghost p-1"
+            >
+              <FaGoogle />
+            </button>
+            <button className="btn text-2xl btn-ghost p-1">
+              <FaFacebook />
+            </button>
           </div>
           <div className="text-center border-t-2 mt-2">
             <p className="my-2">

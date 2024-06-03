@@ -6,8 +6,8 @@ const Home = () => {
   return (
     <div className="">
       <Banner></Banner>
-      <Signup></Signup>
       <Signin></Signin>
+      <Signup></Signup>
     </div>
   );
 };
