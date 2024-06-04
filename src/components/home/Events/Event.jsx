@@ -8,9 +8,9 @@ const Event = ({ event }) => {
   const [day, month] = date.split(" ");
 
   return (
-    <div className="font-serif bg-slate-50 grid grid-cols-2 shadow-md overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1">
+    <div className="font-serif bg-slate-50 grid grid-cols-1 lg:grid-cols-2 shadow-md overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1">
       <div className="relative">
-        <img className="w-full" src={image} alt={title} />
+        <img className="w-full max-h-[300px]" src={image} alt={title} />
         <div className="absolute top-0 left-0 text-2xl text-white p-3 bg-gradient-to-r from-orange-400 to-orange-600 justify-center text-center">
           <h3 className="leading-none font-bold">{day}</h3>
           <h3 className="leading-none">{month.slice(0, 3).toUpperCase()}</h3>

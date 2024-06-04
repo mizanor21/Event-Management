@@ -115,11 +115,11 @@ const Events = () => {
   ];
   return (
     <div className="container mx-auto max-w-[1200px] mb-20">
-      <div className="border-l-4 border-orange-600 pl-2">
-        <h2 className="text-4xl font-serif">Events</h2>
+      <div className="border-l-4 border-orange-600 pl-2 mx-3 lg:mx-0">
+        <h2 className="text-4xl font-serif uppercase">Upcoming Events</h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-5">
-        {events.map((event, i) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-5 mx-3 lg:mx-0">
+        {events.slice(0, 4).map((event, i) => (
           <Event key={i} event={event}></Event>
         ))}
       </div>
