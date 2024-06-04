@@ -34,7 +34,7 @@ const Event = ({ event }) => {
         <div className=" justify-self-end text-center">
           {" "}
           {/* Align button to bottom right */}
-          <button className="px-4 py-2 w-full rounded-md bg-gradient-to-r from-orange-400 to-orange-600 hover:bg-gradient-to-r hover:from-orange-600 hover:to-orange-400 text-sm font-bold text-white">
+          <button className="px-4 py-2 w-full rounded-md bg-gradient-to-r from-orange-400 to-orange-600 hover:from-orange-600 hover:to-orange-400 text-sm font-bold text-white">
             TICKETS & DETAILS
           </button>
         </div>
