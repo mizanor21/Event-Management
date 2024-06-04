@@ -4,7 +4,7 @@ import Home from "../components/home/Home";
 import About from "../components/Others/AboutUs/About";
 import Contact from "../components/Others/Contact/Contact";
 import DashLayouts from "../layouts/DashLayouts";
-import Dashboard from "../components/dashboard/Dashboard";
+import DashHome from "../components/dashboard/DashHome";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <Dashboard></Dashboard>,
+        element: <DashHome></DashHome>,
       },
     ],
   },

@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import auth from "../../firebase.config";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 
@@ -113,15 +113,30 @@ const DashLayouts = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-80 min-h-full bg-slate-100">
-            {/* Sidebar content here */}
-            <li>
-              <a>Sidebar Item 1</a>
-            </li>
-            <li>
-              <a>Sidebar Item 2</a>
-            </li>
-          </ul>
+          <div className="menu p-4 w-80 min-h-full bg-slate-100 flex flex-col justify-between">
+            <ul className="flex flex-col gap-2">
+              <li>
+                <NavLink to={"/dashboard"}>Dash Home</NavLink>
+              </li>
+              <li>
+                <NavLink to={"/"}>All Events</NavLink>
+              </li>
+              <li>
+                <NavLink to={"/"}>Add Event</NavLink>
+              </li>
+            </ul>
+            <button
+              onClick={async () => {
+                const success = await signOut();
+                if (success) {
+                  alert("You are signed out");
+                }
+              }}
+              className="btn"
+            >
+              Sign out
+            </button>
+          </div>
         </div>
       </div>
     </div>
