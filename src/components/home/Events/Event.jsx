@@ -11,7 +11,7 @@ const Event = ({ event }) => {
     <div className="font-serif bg-slate-50 grid grid-cols-1 lg:grid-cols-2 shadow-md overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1">
       <div className="relative">
         <img className="w-full max-h-[300px]" src={image} alt={title} />
-        <div className="absolute top-0 left-0 text-2xl text-white p-3 bg-gradient-to-r from-orange-400 to-orange-600 justify-center text-center">
+        <div className="absolute top-0 left-0 text-2xl text-white p-3 bg-gradient-to-r from-orange-300 to-orange-600 justify-center text-center">
           <h3 className="leading-none font-bold">{day}</h3>
           <h3 className="leading-none">{month.slice(0, 3).toUpperCase()}</h3>
         </div>
@@ -36,7 +36,7 @@ const Event = ({ event }) => {
         <div className=" justify-self-end text-center">
           {" "}
           {/* Align button to bottom right */}
-          <button className="px-4 py-2 w-full rounded-md bg-gradient-to-r from-orange-400 to-orange-600 hover:from-orange-600 hover:to-orange-400 text-sm font-bold text-white">
+          <button className="px-4 py-2 w-full rounded-md bg-gradient-to-r from-orange-300 to-orange-600 hover:from-orange-600 hover:to-orange-300 text-sm font-bold text-white">
             TICKETS & DETAILS
           </button>
         </div>
