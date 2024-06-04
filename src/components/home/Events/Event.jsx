@@ -18,8 +18,10 @@ const Event = ({ event }) => {
       </div>
       <div className="p-6 flex flex-col justify-between">
         <div>
-          <p className="text-xl font-bold">{title}</p>
-          <p className="text-orange-500">Tickets from {price}</p>
+          <div className="border-l-4 pl-3 border-double border-orange-500">
+            <p className="text-xl font-bold">{title}</p>
+            <p className="text-orange-500">Tickets from {price}</p>
+          </div>
           <div className="my-5">
             <div className="flex items-center">
               <IoTimeOutline className="text-orange-500" />
