@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import auth from "../../../firebase.config";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
+import { useEffect } from "react";
 
 const Navbar = () => {
   // eslint-disable-next-line no-unused-vars
@@ -24,9 +25,36 @@ const Navbar = () => {
     </>
   );
 
+  const handleScroll = () => {
+    const navbar = document.querySelector(".navbar");
+    const scrollY = window.scrollY;
+
+    if (scrollY > window.innerHeight * 0.3) {
+      navbar.classList.add(
+        "bg-gradient-to-r",
+        "from-orange-400",
+        "to-orange-600",
+        "text-white"
+      );
+    } else {
+      navbar.classList.remove(
+        "bg-gradient-to-r",
+        "from-orange-400",
+        "to-orange-600"
+      );
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []); // Empty dependency array to run the effect only once
   return (
-    <div className="sticky top-0 z-50 text-orange-700 font-bold font-serif">
-      <div className="navbar container mx-auto">
+    <div className="sticky top-0 z-50  font-bold font-serif">
+      <div
+        className="navbar container mx-auto sm:rounded-xl"
+        onScroll={handleScroll}
+      >
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -90,7 +118,7 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-content rounded-box w-52"
               >
                 <li>
                   <a className="justify-between">
