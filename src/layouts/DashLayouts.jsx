@@ -11,7 +11,7 @@ const DashLayouts = () => {
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col ">
           {/* Navbar */}
-          <div className="w-full navbar bg-gradient-to-r from-orange-400 to-orange-600">
+          <div className="w-full navbar bg-slate-100">
             <div className="flex-none lg:hidden">
               <label
                 htmlFor="my-drawer-3"
@@ -113,7 +113,7 @@ const DashLayouts = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-80 min-h-full bg-gradient-to-r from-orange-600 to-orange-400">
+          <ul className="menu p-4 w-80 min-h-full bg-slate-100">
             {/* Sidebar content here */}
             <li>
               <a>Sidebar Item 1</a>
