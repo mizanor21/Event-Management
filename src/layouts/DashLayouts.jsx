@@ -134,7 +134,7 @@ const DashLayouts = () => {
               }}
               className="btn"
             >
-              Sign out
+              Logout
             </button>
           </div>
         </div>

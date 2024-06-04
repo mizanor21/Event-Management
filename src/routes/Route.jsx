@@ -5,6 +5,7 @@ import About from "../components/Others/AboutUs/About";
 import Contact from "../components/Others/Contact/Contact";
 import DashLayouts from "../layouts/DashLayouts";
 import DashHome from "../components/dashboard/DashHome";
+import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashLayouts />,
+    element: (
+      <PrivetRoute>
+        <DashLayouts />
+      </PrivetRoute>
+    ),
     children: [
       {
         path: "/dashboard",
