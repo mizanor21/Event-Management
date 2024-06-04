@@ -22,6 +22,11 @@ const Navbar = () => {
       <li>
         <NavLink to={"/contact"}>Contact</NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink to={"/dashboard"}>Dashboard</NavLink>
+        </li>
+      )}
     </>
   );
 
@@ -33,8 +38,7 @@ const Navbar = () => {
       navbar.classList.add(
         "bg-gradient-to-r",
         "from-orange-400",
-        "to-orange-600",
-        "text-white"
+        "to-orange-600"
       );
     } else {
       navbar.classList.remove(
@@ -50,7 +54,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []); // Empty dependency array to run the effect only once
   return (
-    <div className="sticky top-0 z-50  font-bold font-serif">
+    <div className="sticky top-0 z-50  font-bold font-serif text-white">
       <div
         className="navbar container mx-auto sm:rounded-xl"
         onScroll={handleScroll}

@@ -3,6 +3,8 @@ import MainLayouts from "../layouts/MainLayouts";
 import Home from "../components/home/Home";
 import About from "../components/Others/AboutUs/About";
 import Contact from "../components/Others/Contact/Contact";
+import DashLayouts from "../layouts/DashLayouts";
+import Dashboard from "../components/dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,16 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact></Contact>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashLayouts />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard></Dashboard>,
       },
     ],
   },
