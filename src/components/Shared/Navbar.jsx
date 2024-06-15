@@ -56,7 +56,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []); // Empty dependency array to run the effect only once
   return (
-    <div className="sticky top-0 z-50  font-bold font-serif text-green-500">
+    <div className="sticky top-0 z-50  font-bold font-serif text-orange-400">
       <div
         className="navbar container mx-auto sm:rounded-xl"
         onScroll={handleScroll}
