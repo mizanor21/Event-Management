@@ -6,6 +6,7 @@ import Contact from "../components/Others/Contact/Contact";
 import DashLayouts from "../layouts/DashLayouts";
 import DashHome from "../components/dashboard/DashHome";
 import PrivetRoute from "./PrivetRoute";
+import AllEvents from "../components/home/Events/AllEvents";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About></About>,
+      },
+      {
+        path: "/all-events",
+        element: <AllEvents></AllEvents>,
       },
       {
         path: "/contact",
