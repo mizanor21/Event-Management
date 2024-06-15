@@ -38,13 +38,15 @@ const Navbar = () => {
       navbar.classList.add(
         "bg-gradient-to-r",
         "from-orange-400",
-        "to-orange-600"
+        "to-orange-600",
+        "text-white"
       );
     } else {
       navbar.classList.remove(
         "bg-gradient-to-r",
         "from-orange-400",
-        "to-orange-600"
+        "to-orange-600",
+        "text-white"
       );
     }
   };
@@ -54,7 +56,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []); // Empty dependency array to run the effect only once
   return (
-    <div className="sticky top-0 z-50  font-bold font-serif text-white">
+    <div className="sticky top-0 z-50  font-bold font-serif text-green-500">
       <div
         className="navbar container mx-auto sm:rounded-xl"
         onScroll={handleScroll}
