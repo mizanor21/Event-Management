@@ -1,8 +1,9 @@
 import { CiLocationOn } from "react-icons/ci";
 import { IoTimeOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Event = ({ event }) => {
-  const { title, date, price, time, location, image } = event;
+  const { _id, title, date, price, time, location, image } = event;
 
   // Split the date into day and month
   const [day, month] = date.split(" ");
@@ -36,9 +37,12 @@ const Event = ({ event }) => {
         <div className=" justify-self-end text-center">
           {" "}
           {/* Align button to bottom right */}
-          <button className="px-4 py-2 w-full rounded-md bg-gradient-to-r from-orange-300 to-orange-600 hover:from-orange-600 hover:to-orange-300 text-sm font-bold text-white">
+          <Link
+            to={_id}
+            className="px-4 py-2 w-full rounded-md bg-gradient-to-r from-orange-300 to-orange-600 hover:from-orange-600 hover:to-orange-300 text-sm font-bold text-white"
+          >
             TICKETS & DETAILS
-          </button>
+          </Link>
         </div>
       </div>
     </div>

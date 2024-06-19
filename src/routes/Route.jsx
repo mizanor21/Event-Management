@@ -7,6 +7,7 @@ import DashLayouts from "../layouts/DashLayouts";
 import DashHome from "../components/dashboard/DashHome";
 import PrivetRoute from "./PrivetRoute";
 import AllEvents from "../components/home/Events/AllEvents";
+import EventDetails from "../components/home/Events/EventDetails";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
         path: "/all-events",
         element: <AllEvents></AllEvents>,
       },
+      // {
+      //   path: "/all-events/:id",
+      //   element: <EventDetails></EventDetails>,
+      //   loader: () =>
+      // },
       {
         path: "/contact",
         element: <Contact></Contact>,
@@ -42,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <DashHome></DashHome>,
+      },
+      {
+        path: "/dashboard/all-events",
+        element: <AllEvents></AllEvents>,
       },
     ],
   },

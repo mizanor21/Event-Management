@@ -119,10 +119,10 @@ const DashLayouts = () => {
                 <NavLink to={"/dashboard"}>Dash Home</NavLink>
               </li>
               <li>
-                <NavLink to={"/"}>All Events</NavLink>
+                <NavLink to={"/dashboard/all-events"}>All Events</NavLink>
               </li>
               <li>
-                <NavLink to={"/"}>Add Event</NavLink>
+                <NavLink to={"/dashboard/add-event"}>Add Event</NavLink>
               </li>
             </ul>
             <button
