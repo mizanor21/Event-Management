@@ -7,8 +7,9 @@ import DashLayouts from "../layouts/DashLayouts";
 import DashHome from "../components/dashboard/DashHome";
 import PrivetRoute from "./PrivetRoute";
 import AllEvents from "../components/home/Events/AllEvents";
-// import EventDetails from "../components/home/Events/EventDetails";
+import EventDetails from "../components/home/Events/EventDetails";
 import AddEvent from "../components/dashboard/AddEvent";
+import EditEvent from "../components/dashboard/EditEvent";
 
 const router = createBrowserRouter([
   {
@@ -27,11 +28,13 @@ const router = createBrowserRouter([
         path: "/all-events",
         element: <AllEvents></AllEvents>,
       },
-      // {
-      //   path: "/all-events/:id",
-      //   element: <EventDetails></EventDetails>,
-      //   loader: () =>
-      // },
+      {
+        path: "/events/:id",
+        element: <EventDetails></EventDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/events/${params.id}`),
+      },
+
       {
         path: "/contact",
         element: <Contact></Contact>,
@@ -57,6 +60,12 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/add-event",
         element: <AddEvent></AddEvent>,
+      },
+      {
+        path: "/dashboard/event-edit/:id",
+        element: <EditEvent></EditEvent>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/events/${params.id}`),
       },
     ],
   },
