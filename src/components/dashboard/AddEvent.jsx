@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Input, initTWE } from "tw-elements";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddEvent = () => {
   const schema = yup.object().shape({
@@ -13,8 +16,9 @@ const AddEvent = () => {
       .required("Price field is required"),
     time: yup.string().required("Time field is required"),
     date: yup
-      .date()
-      .typeError("Date must be a valid date")
+      // .date()
+      // .typeError("Date must be a valid date")
+      .string()
       .required("Date field is required"),
     location: yup.string().required("Location field is required"),
     image: yup
@@ -30,23 +34,44 @@ const AddEvent = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
+    reset,
   } = useForm({
     mode: "onChange",
     resolver: yupResolver(schema),
   });
 
+  // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState("");
 
   useEffect(() => {
     initTWE({ Input });
   }, []);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     setData(JSON.stringify(data));
-    reset(); // Reset the form values
+    try {
+      const response = await axios.post("http://localhost:5000/events", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status === 200 || response.status === 201) {
+        // Data successfully sent
+        reset(); // Reset the form values
+        toast.success("Event added successfully!");
+      } else {
+        // Handle errors
+        console.error("Failed to send data:", response.statusText);
+        toast.error("Failed to add event!");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred while adding the event!");
+    }
   };
+
   return (
     <div className="p-10 font-serif">
       <h3 className="text-3xl border-l-4 border-orange-400 pl-5 mb-5 uppercase">
@@ -155,14 +180,14 @@ const AddEvent = () => {
             <div className="relative" data-twe-input-wrapper-init>
               <input
                 {...register("image")}
-                type="url"
+                type="text"
                 className="peer block min-h-[auto] w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
               />
               <label
                 htmlFor="image"
                 className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[0.9rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-primary"
               >
-                Event Thumbnail
+                Event Image URL
               </label>
             </div>
             {errors.image && (
@@ -171,26 +196,18 @@ const AddEvent = () => {
               </span>
             )}
           </div>
-          <div>
+          <div className="col-span-1 md:col-span-2 lg:col-span-3">
             <div className="relative" data-twe-input-wrapper-init>
               <textarea
                 {...register("description")}
-                type="text"
-                className="peer block min-h-[200px] w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
-                id="description"
-                data-twe-input-showcounter="true"
-                maxLength="500"
+                className="peer block min-h-[150px] w-full rounded border-2 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0"
               />
               <label
                 htmlFor="description"
                 className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[0.9rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-primary"
               >
-                Description
+                Event Description
               </label>
-              <div
-                className="absolute w-full text-sm text-neutral-500"
-                data-twe-input-helper-ref
-              ></div>
             </div>
             {errors.description && (
               <span className="text-sm text-red-600">
@@ -199,10 +216,14 @@ const AddEvent = () => {
             )}
           </div>
         </div>
-
-        <p>{data}</p>
-        <input className="btn bg-orange-400 mt-2" type="submit" />
+        <button
+          type="submit"
+          className="mt-5 bg-orange-400 text-white py-2 px-4 rounded"
+        >
+          Add Event
+        </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };

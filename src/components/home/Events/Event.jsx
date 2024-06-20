@@ -1,20 +1,29 @@
+import { AiTwotoneDelete } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
 import { IoTimeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-const Event = ({ event }) => {
+const Event = ({ event, onDelete }) => {
   const { _id, title, date, price, time, location, image } = event;
 
   // Split the date into day and month
   const [day, month] = date.split(" ");
 
+  // Define the delete function
+  const handleDelete = () => {
+    // Call the onDelete prop with the event id
+    if (onDelete) {
+      onDelete(_id);
+    }
+  };
+
   return (
     <div className="font-serif bg-slate-50 grid grid-cols-1 lg:grid-cols-2 shadow-md overflow-hidden transition-transform duration-300 ease-in-out hover:-translate-y-1">
       <div className="relative">
-        <img className="w-full max-h-[300px]" src={image} alt={title} />
+        <img className="w-full h-full" src={image} alt={title} />
         <div className="absolute top-0 left-0 text-2xl text-white p-3 bg-gradient-to-r from-orange-300 to-orange-600 justify-center text-center">
           <h3 className="leading-none font-bold">{day}</h3>
-          <h3 className="leading-none">{month.slice(0, 3).toUpperCase()}</h3>
+          <h3 className="leading-none">{month?.slice(0, 3)?.toUpperCase()}</h3>
         </div>
       </div>
       <div className="p-6 flex flex-col justify-between">
@@ -34,15 +43,22 @@ const Event = ({ event }) => {
             </div>
           </div>
         </div>
-        <div className=" justify-self-end text-center">
-          {" "}
-          {/* Align button to bottom right */}
+        <div className="flex justify-between items-center">
           <Link
             to={_id}
-            className="px-4 py-2 w-full rounded-md bg-gradient-to-r from-orange-300 to-orange-600 hover:from-orange-600 hover:to-orange-300 text-sm font-bold text-white"
+            className="px-4 py-2 rounded-md bg-gradient-to-r from-orange-300 to-orange-600 hover:from-orange-600 hover:to-orange-300 text-sm font-bold text-white"
           >
-            TICKETS & DETAILS
+            DETAILS
           </Link>
+          {/* Conditionally render the delete button only if onDelete prop is present */}
+          {onDelete && (
+            <button
+              onClick={handleDelete}
+              className="px-4 py-2 rounded-md bg-gradient-to-r from-orange-300 to-orange-600 hover:from-orange-600 hover:to-orange-300 text-sm font-bold text-white"
+            >
+              <AiTwotoneDelete />
+            </button>
+          )}
         </div>
       </div>
     </div>
