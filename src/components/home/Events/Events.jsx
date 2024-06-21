@@ -10,7 +10,7 @@ const Events = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5000/events")
+      .get("https://event-server-7w6i.onrender.com/events")
       .then((response) => {
         setEvents(response.data);
         setLoading(false);

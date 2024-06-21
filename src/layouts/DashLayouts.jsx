@@ -116,7 +116,7 @@ const DashLayouts = () => {
           <div className="menu p-4 w-80 min-h-full bg-slate-100 flex flex-col justify-between">
             <ul className="flex flex-col gap-2">
               <li>
-                <NavLink to={"/dashboard"}>Dash Home</NavLink>
+                <NavLink to={"/"}>Home</NavLink>
               </li>
               <li>
                 <NavLink to={"/dashboard/all-events"}>All Events</NavLink>

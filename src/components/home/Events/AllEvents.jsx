@@ -12,7 +12,7 @@ const AllEvents = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5000/events")
+      .get("https://event-server-7w6i.onrender.com/events")
       .then((response) => {
         setEvents(response.data);
         setLoading(false);
@@ -31,7 +31,9 @@ const AllEvents = () => {
   const handleDeleteEvent = async (id) => {
     if (window.confirm("Are you sure you want to delete")) {
       try {
-        await axios.delete(`http://localhost:5000/events/${id}`);
+        await axios.delete(
+          `https://event-server-7w6i.onrender.com/events/${id}`
+        );
         setEvents(events.filter((event) => event._id !== id));
         toast.success("Event deleted successfully", {
           position: "top-right",

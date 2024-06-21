@@ -71,7 +71,7 @@ const AddEvent = () => {
     setData(JSON.stringify(customData));
     try {
       const response = await axios.post(
-        "http://localhost:5000/events",
+        "https://event-server-7w6i.onrender.com/events",
         customData,
         {
           headers: {

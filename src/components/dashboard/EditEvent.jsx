@@ -51,7 +51,7 @@ const EditEvent = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/event-edit/${_id}`,
+        `https://event-server-7w6i.onrender.com/event-edit/${_id}`,
         data,
         {
           headers: {

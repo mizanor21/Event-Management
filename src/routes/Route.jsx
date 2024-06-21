@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         path: "/events/:id",
         element: <EventDetails></EventDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/events/${params.id}`),
+          fetch(`https://event-server-7w6i.onrender.com/events/${params.id}`),
       },
 
       {
@@ -65,7 +65,7 @@ const router = createBrowserRouter([
         path: "/dashboard/event-edit/:id",
         element: <EditEvent></EditEvent>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/events/${params.id}`),
+          fetch(`https://event-server-7w6i.onrender.com/events/${params.id}`),
       },
     ],
   },
