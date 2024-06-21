@@ -6,8 +6,27 @@ import { Input, initTWE } from "tw-elements";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Uploader } from "uploader"; // Installed by "react-uploader".
+import { UploadDropzone } from "react-uploader";
+
+const uploader = Uploader({
+  apiKey: "public_12a1z1REu3fCw6pTwEPR8ojAM3EN", // This is your API key.
+});
+
+// Configuration options: https://www.bytescale.com/docs/upload-widget/frameworks/react#customize
+const options = {
+  maxFileCount: 1,
+  showFinishButton: true, // Note: You must use 'onUpdate' if you set 'showFinishButton: false' (default).
+  styles: {
+    colors: {
+      primary: "#377dff",
+    },
+  },
+};
 
 const AddEvent = () => {
+  const [img, setImg] = useState([]);
+  // console.log(img);
   const schema = yup.object().shape({
     title: yup.string().required("Title field is required"),
     price: yup
@@ -21,10 +40,10 @@ const AddEvent = () => {
       .string()
       .required("Date field is required"),
     location: yup.string().required("Location field is required"),
-    image: yup
-      .string()
-      .url("Image must be a valid URL")
-      .required("Image field is required"),
+    // image: yup
+    //   .string()
+    //   .url("Image must be a valid URL")
+    //   .required("Image field is required"),
     description: yup
       .string()
       .max(500, "Description cannot exceed 500 characters")
@@ -49,13 +68,18 @@ const AddEvent = () => {
   }, []);
 
   const onSubmit = async (data) => {
-    setData(JSON.stringify(data));
+    const customData = { ...data, image: img.toString() };
+    setData(JSON.stringify(customData));
     try {
-      const response = await axios.post("http://localhost:5000/events", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:5000/events",
+        customData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.status === 200 || response.status === 201) {
         // Data successfully sent
@@ -176,7 +200,7 @@ const AddEvent = () => {
               </span>
             )}
           </div>
-          <div>
+          {/* <div>
             <div className="relative" data-twe-input-wrapper-init>
               <input
                 {...register("image")}
@@ -195,7 +219,7 @@ const AddEvent = () => {
                 {errors.image.message}
               </span>
             )}
-          </div>
+          </div> */}
           <div className="col-span-1 md:col-span-2 lg:col-span-3">
             <div className="relative" data-twe-input-wrapper-init>
               <textarea
@@ -216,6 +240,14 @@ const AddEvent = () => {
             )}
           </div>
         </div>
+        <UploadDropzone
+          uploader={uploader}
+          options={options}
+          onComplete={(files) => setImg(files.map((x) => x.fileUrl))}
+        >
+          {({ onClick }) => <button onClick={onClick}>Upload a file...</button>}
+        </UploadDropzone>
+        <img src={img} alt="img not found!" />
         <button
           type="submit"
           className="mt-5 bg-orange-400 text-white py-2 px-4 rounded"
