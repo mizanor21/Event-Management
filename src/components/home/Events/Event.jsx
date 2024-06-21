@@ -3,9 +3,13 @@ import { CiLocationOn } from "react-icons/ci";
 import { FaEdit } from "react-icons/fa";
 import { IoTimeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import auth from "../../../../firebase.config";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 // eslint-disable-next-line no-unused-vars
 const Event = ({ event, onDelete, onEdit }) => {
+  // eslint-disable-next-line no-unused-vars
+  const [user, loading, error] = useAuthState(auth);
   const { _id, title, date, price, time, location, image } = event;
 
   // Split the date into day and month
@@ -54,7 +58,7 @@ const Event = ({ event, onDelete, onEdit }) => {
           </Link>
           {/* Conditionally render the delete button only if onDelete prop is present */}
           <div className="flex gap-2">
-            {onDelete && (
+            {user && (
               <button
                 onClick={handleDelete}
                 className="px-4 py-2 rounded-md bg-gradient-to-r from-orange-300 to-orange-600 hover:from-orange-600 hover:to-orange-300 text-sm font-bold text-white"
@@ -62,12 +66,14 @@ const Event = ({ event, onDelete, onEdit }) => {
                 <AiTwotoneDelete />
               </button>
             )}
-            <Link
-              to={`/dashboard/event-edit/${_id}`}
-              className="px-4 py-2 rounded-md bg-gradient-to-r from-orange-300 to-orange-600 hover:from-orange-600 hover:to-orange-300 text-sm font-bold text-white"
-            >
-              <FaEdit />
-            </Link>
+            {user && (
+              <Link
+                to={`/dashboard/event-edit/${_id}`}
+                className="px-4 py-2 rounded-md bg-gradient-to-r from-orange-300 to-orange-600 hover:from-orange-600 hover:to-orange-300 text-sm font-bold text-white"
+              >
+                <FaEdit />
+              </Link>
+            )}
             {/* {onEdit && (
             )} */}
           </div>
