@@ -16,7 +16,7 @@ const uploader = Uploader({
 // Configuration options: https://www.bytescale.com/docs/upload-widget/frameworks/react#customize
 const options = {
   maxFileCount: 1,
-  showFinishButton: true, // Note: You must use 'onUpdate' if you set 'showFinishButton: false' (default).
+  // showFinishButton: true, // Note: You must use 'onUpdate' if you set 'showFinishButton: false' (default).
   styles: {
     colors: {
       primary: "#377dff",
@@ -26,7 +26,6 @@ const options = {
 
 const AddEvent = () => {
   const [img, setImg] = useState([]);
-  // console.log(img);
   const schema = yup.object().shape({
     title: yup.string().required("Title field is required"),
     price: yup
@@ -243,11 +242,10 @@ const AddEvent = () => {
         <UploadDropzone
           uploader={uploader}
           options={options}
-          onComplete={(files) => setImg(files.map((x) => x.fileUrl))}
+          onUpdate={(files) => setImg(files.map((x) => x.fileUrl).join("\n"))}
         >
           {({ onClick }) => <button onClick={onClick}>Upload a file...</button>}
         </UploadDropzone>
-        <img src={img} alt="img not found!" />
         <button
           type="submit"
           className="mt-5 bg-orange-400 text-white py-2 px-4 rounded"
